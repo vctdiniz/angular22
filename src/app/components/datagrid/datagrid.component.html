@@ -1,0 +1,15 @@
+<table>
+    <tbody *ngFor="let user of observableData$ | async">
+        <tr>
+            <td>{{user.name}}</td>
+            <td>{{user.age}}</td>
+        </tr>
+    </tbody>
+</table>
+<div>
+    <form (ngSubmit)="onSubmit(inputForm)" #inputForm="ngForm">
+        <input type="text" name="name" required ngModel />
+        <input type="number" name="age" required ngModel />
+        <button type="submit" [disabled]="!inputForm.valid">submit</button>
+    </form>
+</div>
