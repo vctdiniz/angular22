@@ -1,0 +1,13 @@
+<h4>AsyncPipe Test App</h4>
+<ul>
+    <ng-template ngFor [ngForOf]="items$ | async" let-item let-i="index">
+        <li>{{ i }} - {{ item.name }} - {{ item.age }} </li>
+    </ng-template>
+</ul>
+<form (ngSubmit)="onClickAdd(formUser)" #formUser="ngForm">
+    <input type="text" name="name" ngModel />
+    <input type="number" name="age" ngModel />
+    <button type="submit">Add +</button>
+</form>
+
+<p *ngIf="loading$ | async">Carregando dados...</p>
