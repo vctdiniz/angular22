@@ -1,13 +1,31 @@
 <h4>AsyncPipe Test App</h4>
-<ul>
+<table class="table">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Idade</th>
+      <th scope="col">buttons</th>
+    </tr>
+  </thead>
+  <tbody>
     <ng-template ngFor [ngForOf]="items$ | async" let-item let-i="index">
-        <li>{{ i }} - {{ item.name }} - {{ item.age }} </li>
+      <tr>
+        <td>{{ i + 1 }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.age }} </td>
+        <td>
+          <button (click)="onClickEdit(item)">Editar</button>
+          <button (click)="onClickDelete(item)">Excluir</button>
+        </td>
+      </tr>
     </ng-template>
-</ul>
+  </tbody>
+</table>
 <form (ngSubmit)="onClickAdd(formUser)" #formUser="ngForm">
-    <input type="text" name="name" ngModel />
-    <input type="number" name="age" ngModel />
-    <button type="submit">Add +</button>
+  <input type="text" name="name" ngModel />
+  <input type="number" name="age" ngModel />
+  <button type="submit">Add +</button>
 </form>
 
 <p *ngIf="loading$ | async">Carregando dados...</p>

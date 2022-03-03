@@ -1,7 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { User } from 'src/app/app.model';
+
+const USERS_URL = 'http://localhost:3000/users';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,7 @@ export class AsyncTestService {
   }
 
   private loadItems() {
-    this.http.get<User[]>('http://localhost:3000/users').subscribe(i => this.items.next(i));
+    this.http.get<User[]>(USERS_URL).subscribe(i => this.items.next(i));
   }
 
   getItems() {
@@ -22,7 +24,11 @@ export class AsyncTestService {
   }
 
   addItem(item: User) {
-    return this.http.post<User>('http://localhost:3000/users', item).subscribe(() => this.loadItems());
+    return this.http.post<User>(USERS_URL, item).subscribe(() => this.loadItems());
+  }
+
+  updateItem(item: User) {
+    return this.http.patch<User>(USERS_URL, item).subscribe(() => this.loadItems());
   }
 
 }
